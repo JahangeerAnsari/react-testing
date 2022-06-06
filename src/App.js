@@ -1,20 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+export const replaceCamelCaseWithSpace = (colorName) => {
+  return colorName.replace(/\B([A-Z])\B/g,' $1');
+}
 
 function App() {
-  const [ buttonColor, setButtonColor ] = useState('red');
+  const [ buttonColor, setButtonColor ] = useState('MediumVioletRed');
   const [ disabled, setDisabled ] = useState(false);
   
-  const newButtonColor = buttonColor === 'red' ? 'blue' : 'red';
- 
+  const newButtonColor = buttonColor === 'MediumVioletRed' ? 'MidnightBlue' : 'MediumVioletRed';
+  
   return (
     <div>
-    <button
-       style={{backgroundColor: disabled ? 'gray' : buttonColor }}
-       onClick={() => setButtonColor(newButtonColor)}
-       disabled={disabled}
-     >Change to {newButtonColor}</button>
+      <button
+        style={{backgroundColor: disabled ? 'gray' : buttonColor}}
+        onClick={() => setButtonColor(newButtonColor)}
+        disabled={disabled}
+      >Change to {replaceCamelCaseWithSpace(newButtonColor)}</button>
     <br />
     <input
         type="checkbox"
@@ -22,7 +25,7 @@ function App() {
         defaultChecked={disabled}
         aria-checked={disabled}
         onChange={(e) => setDisabled(e.target.checked)} />
-    <label htmlFor="disable-button-checkbox">Disable button</label>
+        <label htmlFor="disable-button-checkbox">Disable button</label>
     </div>  
   );
 }

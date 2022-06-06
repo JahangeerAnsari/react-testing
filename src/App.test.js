@@ -1,76 +1,76 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
+import {replaceCamelCaseWithSpace} from './App'
 
-// test('button has initial color', () => {
-//   render(<App/>);
+
+// test('button has correct initial color', () => {
+//   render(<App />);
+
 //   // find an element with a role of button and text of 'Change to blue'
-//   const colorButton = screen.getByRole('button',{name:'Change to blue'});
-//   //expect the background color to be red
-//   expect(colorButton).toHaveStyle({ backgroundColor:'red' })
-//   // clicked button
+//   const colorButton = screen.getByRole('button', { name: 'Change to blue' });
+
+//   // expect the background color to be red
+//   expect(colorButton).toHaveStyle({ backgroundColor: 'red' })
+
+//   // click button
 //   fireEvent.click(colorButton);
 
-//   // expect the background color should be red
-//   expect(colorButton).toHaveStyle({ backgroundColor:"blue"});
+//   // expect the background color to be blue
+//   expect(colorButton).toHaveStyle({ backgroundColor: 'blue' });
 
-//   //expect the button color should be changed to blue
-//   expect(colorButton.textContent).toBe('Change to blue');
+//   // expect the button text to be 'Change to red'
+//   expect(colorButton.textContent).toBe('Change to red');
 // });
 
-// test('initial condition',() => {
+test('button has initial color', () => {
+  // find an element with a role of button has text of 'Change to MidnightBlue'
+  const colorButton = screen.getByRole('button', { name: 'Change to Midnight Blue' });
 
-//   render(<App/>);
-// // check the button start enabled
-//   const colorButton = screen.getByRole('button',{name:'Change to blue'});
-//   expect(colorButton).toBeEnabled();
-// // chekc the checkbox starts out unchecked
-//   const checkbox = screen.getByRole('checkbox');
-//   expect(checkbox).not.toBeChecked()
-// })
-
-// test('checkbox disabled the button on first click and second click it is enabled', () =>{
-//   render(<App/>);
-//   const checkbox = screen.getByRole('checkbox',{name:'Disabled checkbox'});
-//   const button = screen.getByRole('button',{name:"Change to gray"});
-
-//   // case 1 button is disabled  when checkbox checked
-//   fireEvent.click(checkbox);
-//   expect(button).toBeDisabled();
-
-//   // case 2 button is enabled when  checkbox unchecked
-//   fireEvent.click(checkbox);
-//   expect(button).toBeEnabled();
-
-// })
-test('disabled button has gray background color and reverts to red',() => {
-  render(<App/>);
-  const checkbox = screen.getByRole('checkbox', {name: 'Disabled button'});
-  const colorButton = screen.getByRole('button', {name: 'Change to red'});
-
-  // disabled button
-  fireEvent.click(checkbox);
-  expect(colorButton).toHaveStyle('background-color:gray');
-
-  // reverts to 
-  fireEvent.click(checkbox);
-  expect(colorButton).toHaveStyle('background-color:red');
-
-});
-
-test('clicked disabled button has gray background  and reverts to blue',() => {
-  render(<App/>);
-  const checkbox = screen.getByRole('checkbox',{name:'Disabled button'});
-  const colorButton = screen.getByRole('button',{name:'Change to blue'});
-
-  //  change to blue
+  expect(colorButton).toHaveStyle({ backgroundColor:'MediumVoiletRed'});
+  // click  button
   fireEvent.click(colorButton);
 
-  // disabled button
-  fireEvent.click(checkbox);
-  expect(colorButton).toHaveStyle('background-color:gray');
-  
-  // re-enabled button
-  fireEvent.click(checkbox);
-  expect(colorButton).toHaveStyle('background-color:blue');
+  //  expect the background color to be blue
+  expect(colorButton).toHaveStyle({ backgroundColor: 'MidnightBlue' });
 
+  // expect the color to be 'change to midnightVoliete'
+  expect(colorButton.textContent).toBe('Change to Medium Voilet Red');
 })
+
+// test('initial conditions', () => {
+//   render(<App />);
+  
+//   // check that the button starts out enabled
+//   const colorButton = screen.getByRole('button', { name: 'Change to blue' });
+//   expect(colorButton).toBeEnabled();
+
+//   // check that the checkbox starts out unchecked
+//   const checkbox = screen.getByRole('checkbox');
+//   expect(checkbox).not.toBeChecked();
+// });
+
+// test('Checkbox disables button on first click and enables on second click', () => {
+//   render(<App />);
+//   const checkbox = screen.getByRole('checkbox', { name: 'Disable button' });
+//   const colorButton = screen.getByRole('button', { name: 'Change to blue' });
+  
+//   fireEvent.click(checkbox);
+//   expect(colorButton).toBeDisabled();
+  
+//   fireEvent.click(checkbox);
+//   expect(colorButton).toBeEnabled();
+//  });
+ 
+//  describe statement
+//  a describe statement is a way of grooping tests
+describe('spaces before camel-case capital letters', () => {
+  test('Works for no inner capital letters', () => {
+    expect(replaceCamelCaseWithSpace('Red')).toBe('Red');
+  });
+  test('Works for one inner capital letter', () => {
+    expect(replaceCamelCaseWithSpace('MidnightBlue')).toBe('Midnight Blue');
+  });
+  test('Works for multiple inner capital letters', () => {
+    expect(replaceCamelCaseWithSpace('MediumVioletRed')).toBe('Medium Violet Red');
+  });
+});
