@@ -22,11 +22,12 @@ import {replaceCamelCaseWithSpace} from './App'
 //   expect(colorButton.textContent).toBe('Change to red');
 // });
 
-test('button has initial color', () => {
+test('button has correct initial color', () => {
   // find an element with a role of button has text of 'Change to MidnightBlue'
   const colorButton = screen.getByRole('button', { name: 'Change to Midnight Blue' });
 
-  expect(colorButton).toHaveStyle({ backgroundColor:'MediumVoiletRed'});
+  // expect the background color to be red
+  expect(colorButton).toHaveStyle({ backgroundColor:'MediumVioletRed'});
   // click  button
   fireEvent.click(colorButton);
 
@@ -34,7 +35,7 @@ test('button has initial color', () => {
   expect(colorButton).toHaveStyle({ backgroundColor: 'MidnightBlue' });
 
   // expect the color to be 'change to midnightVoliete'
-  expect(colorButton.textContent).toBe('Change to Medium Voilet Red');
+  expect(colorButton.textContent).toBe('Change to Medium Violet Red');
 })
 
 // test('initial conditions', () => {
